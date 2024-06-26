@@ -7,21 +7,21 @@ converter for Ezon gpx file.
 
 ## Feat
 
-convert Ezon gpx files
+convert Ezon gpx files.
 
 - add location info to `wpt`.
-- delete empty point.
+- delete useless empty point.
 - fix timezone to UTC.
 
 ## Usage
 
-![PyPI - Version](https://img.shields.io/pypi/v/ezon-gpx)
-![PyPI - Status](https://img.shields.io/pypi/status/ezon-gpx)
-![PyPI - Implementation](https://img.shields.io/pypi/implementation/ezon-gpx)
-![PyPI - Format](https://img.shields.io/pypi/format/ezon-gpx)
-![PyPI - Wheel](https://img.shields.io/pypi/wheel/ezon-gpx)
-![PyPI - License](https://img.shields.io/pypi/l/ezon-gpx)
-![PyPI - Downloads](https://img.shields.io/pypi/dm/ezon-gpx)
+[![PyPI - Version](https://img.shields.io/pypi/v/ezon-gpx)](https://pypi.org/p/ezon-gpx/#history)
+[![PyPI - Status](https://img.shields.io/pypi/status/ezon-gpx)](https://pypi.org/p/ezon-gpx)
+[![PyPI - Implementation](https://img.shields.io/pypi/implementation/ezon-gpx)](https://pypi.org/p/ezon-gpx)
+[![PyPI - Format](https://img.shields.io/pypi/format/ezon-gpx)](https://pypi.org/p/ezon-gpx/#files)
+[![PyPI - Wheel](https://img.shields.io/pypi/wheel/ezon-gpx)](https://pypi.org/p/ezon-gpx/#files)
+[![PyPI - License](https://img.shields.io/pypi/l/ezon-gpx)](./LICENSE)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/ezon-gpx)](https://pypi.org/p/ezon-gpx)
 
 ### pipx
 
