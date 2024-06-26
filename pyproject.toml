@@ -6,7 +6,7 @@ maintainers = [{ name = "Uiolee" }]
 description = "convert Ezon gpx files."
 keywords = ["ezon", "gpx", "xml", "running_page"]
 readme = "README.md"
-license = { file = "LICENSE" }
+license = { text = "MPL-2.0" }
 
 classifiers = [
     "Development Status :: 4 - Beta",
