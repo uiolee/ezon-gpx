@@ -43,3 +43,7 @@ def cli():
 
     print()
     print("[cli.py]", "processed files:", len(paths))
+
+
+if __name__ == "__main__":
+    cli()
