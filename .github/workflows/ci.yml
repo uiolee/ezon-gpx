@@ -6,9 +6,6 @@ on:
     paths:
       - "src/**"
       - "test/**"
-      - "**.py"
-      - "**.gpx"
-      - "**.sh"
       - "pyproject.toml"
       - ".github/workflows/ci.yml"
   pull_request:
@@ -16,9 +13,6 @@ on:
     paths:
       - "src/**"
       - "test/**"
-      - "**.py"
-      - "**.gpx"
-      - "**.sh"
       - "pyproject.toml"
       - ".github/workflows/ci.yml"
 
@@ -32,6 +26,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-tags: "true"
+          fetch-depth: "9"
       - name: Set up Python
         uses: actions/setup-python@v5
         with:

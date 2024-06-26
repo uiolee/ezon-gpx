@@ -1,12 +1,11 @@
 [project]
 name = "ezon-gpx"
-version = "1.0.0"
-authors = [{ name = "Uiolee" }]
-maintainers = [{ name = "Uiolee" }]
+authors = [{ name = "uiolee" }]
+maintainers = [{ name = "uiolee" }]
 description = "convert Ezon gpx files."
 keywords = ["ezon", "gpx", "xml", "running_page"]
 readme = "README.md"
-license = { text = "MPL-2.0" }
+license = { text = "MPL 2.0" }
 
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -26,9 +25,19 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
 ]
 
+dynamic = ["version"]
+
 [project.urls]
 Homepage = "https://github.com/uiolee/ezon-gpx"
+Repository = "https://github.com/uiolee/ezon-gpx.git"
 Issues = "https://github.com/uiolee/ezon-gpx/issues"
 
 [project.scripts]
 ezon-gpx = "cli:cli"
+
+[build-system]
+requires = ["setuptools>=64", "setuptools_scm>=8"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+local_scheme = 'no-local-version'
