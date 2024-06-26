@@ -1,4 +1,4 @@
-name: Publish 🐍 distribution
+name: Publish 🐍
 
 on:
   workflow_dispatch:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Build distribution 📦
+    name: Build
     runs-on: ubuntu-latest
 
     steps:
@@ -32,15 +32,14 @@ jobs:
           path: dist/
 
   publish-to-pypi:
-    name: >-
-      Publish Python 🐍 distribution 📦 to PyPI
+    name: Publish to PyPI
     if: startsWith(github.ref, 'refs/tags/') # only publish to PyPI on tag pushes
     needs:
       - build
     runs-on: ubuntu-latest
     environment:
-      name: pypi
-      url: https://pypi.org/p/ezon-gpx # Replace <package-name> with your PyPI project name
+      name: pypi.org
+      url: https://pypi.org/p/ezon-gpx
     permissions:
       id-token: write # IMPORTANT: mandatory for trusted publishing
     steps:
@@ -53,9 +52,7 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
 
   github-release:
-    name: >-
-      Sign the Python 🐍 distribution 📦 with Sigstore
-      and upload them to GitHub Release
+    name: upload to GitHub Release
     needs:
       - publish-to-pypi
     runs-on: ubuntu-latest
