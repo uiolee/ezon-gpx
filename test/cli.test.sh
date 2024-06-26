@@ -1,3 +1,3 @@
 #!/bin/bash
 
-python cli.py test
+python src/cli.py test

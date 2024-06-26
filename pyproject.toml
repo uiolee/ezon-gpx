@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ezon-gpx"
+version = "0.1.0"
+authors = [
+    {name = "Uiolee"},
+]
+readme = "README.md"
+license = {text = "MPL-2.0"}
+
+[project.scripts]
+ezon-gpx = "cli:cli"
+

@@ -12,18 +12,20 @@ convert Ezon gpx files
 
 ## Usage
 
-### Python
+### Source
 
-see [./main.py](./main.py#L141)
+#### Python
 
-### CLI
+see [./src/main.py](./src/main.py#L141)
+
+#### CLI
 
 ```bash
-./cli.py test/test.gpx [path]
+./src/cli.py test/test.gpx [path]
 ```
 
 ```bash
-./cli.py --help
+./src/cli.py --help
 ```
 
 ## Develop Env

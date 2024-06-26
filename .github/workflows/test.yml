@@ -33,9 +33,9 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.pyv }}
-      - name: Test main.py
+      - name: Test src/main.py
         run: |
-          python ./main.py
+          python src/main.py
       - name: Test cli.py
         shell: bash
         run: |
