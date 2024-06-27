@@ -19,6 +19,10 @@ on:
 permissions:
   contents: read
 
+env:
+  artifact_name: "python-package-distributions"
+  artifact_path: "dist/"
+
 jobs:
   build:
     name: Build
@@ -27,7 +31,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-tags: "true"
+          fetch-tags: "TRUE"
           fetch-depth: "9"
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -42,11 +46,12 @@ jobs:
       - name: Build a binary wheel and a source tarball
         run: python3 -m build
       - name: Store the distribution packages
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: python-package-distributions
-          path: dist/
+          name: ${{ env.artifact_name }}
+          path: ${{ env.artifact_path }}
           retention-days: 1
+          compression-level: 1
 
   test-cli:
     runs-on: ${{ matrix.os }}
@@ -83,10 +88,10 @@ jobs:
 
     steps:
       - name: Download all the dists
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
-          name: python-package-distributions
-          path: dist/
+          name: ${{ env.artifact_name }}
+          path: ${{ env.artifact_path }}
       - name: Publish distribution 📦 to TestPyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:

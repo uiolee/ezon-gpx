@@ -6,6 +6,13 @@ on:
     tags:
       - "v*.*.*"
 
+permissions:
+  contents: read
+
+env:
+  artifact_name: "python-package-distributions"
+  artifact_path: "dist/"
+
 jobs:
   build:
     name: Build
@@ -26,11 +33,12 @@ jobs:
       - name: Build a binary wheel and a source tarball
         run: python3 -m build
       - name: Store the distribution packages
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: python-package-distributions
-          path: dist/
+          name: ${{ env.artifact_name }}
+          path: ${{ env.artifact_path }}
           retention-days: 1
+          compression-level: 1
 
   publish-to-pypi:
     name: Publish to PyPI
@@ -45,15 +53,15 @@ jobs:
       id-token: write # IMPORTANT: mandatory for trusted publishing
     steps:
       - name: Download all the dists
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
-          name: python-package-distributions
-          path: dist/
+          name: ${{ env.artifact_name }}
+          path: ${{ env.artifact_path }}
       - name: Publish distribution 📦 to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
 
   github-release:
-    name: upload to GitHub Release
+    name: Publish GitHub Release
     needs:
       - publish-to-pypi
     runs-on: ubuntu-latest
@@ -64,10 +72,10 @@ jobs:
 
     steps:
       - name: Download all the dists
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
-          name: python-package-distributions
-          path: dist/
+          name: ${{ env.artifact_name }}
+          path: ${{ env.artifact_path }}
       - name: Sign the dists with Sigstore
         uses: sigstore/gh-action-sigstore-python@v2.1.1
         with:
