@@ -1,3 +1,5 @@
 #!/bin/bash
 
-python src/cli.py test
+python --version
+pipx --version
+pipx run ./src/cli.py test
