@@ -60,6 +60,8 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         pyv: ["3.11"]
+    env:
+      python_version: ${{ matrix.pyv }}
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.pyv }}
