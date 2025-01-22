@@ -10,7 +10,7 @@ converter for Ezon gpx file.
 convert Ezon gpx files.
 
 - add location info to `wpt`.
-- delete useless empty point.
+- delete useless empty points.
 - fix timezone to UTC.
 
 ## Usage
@@ -31,7 +31,7 @@ convert Ezon gpx files.
 pipx install ezon-gpx
 ```
 
-####
+#### get help
 
 ```bash
 ezon-gpx -h
@@ -42,14 +42,6 @@ ezon-gpx -h
 #### Python
 
 see [./src/main.py](./src/main.py#L141) for more.
-
-#### CLI
-
-```bash
-./src/cli.py --help
-```
-
-see [./src/cli.py](./src/cli.py) for more.
 
 ## Develop Env
 
