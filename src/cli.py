@@ -1,6 +1,6 @@
 import argparse
 from os import listdir
-from os.path import join, isdir
+from os.path import isdir, join
 
 from main import convert
 
@@ -38,7 +38,7 @@ def cli():
 
     for path in paths:
         print()
-        print("[cli.py]", "processing", path)
+        print("[cli.py]", "processing: ", path)
         convert(path, args.out, args.dir, args.hour, args.indent, args.strict)
 
     print()
