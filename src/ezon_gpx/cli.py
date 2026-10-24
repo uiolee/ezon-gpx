@@ -20,6 +20,7 @@ def cli():
     parser.add_argument(
         "--indent", help="output file with indent", type=bool, default=True
     )
+    parser.add_argument("--indent", help="indent size", type=int, default=2)
     parser.add_argument("--strict", help="strict", type=bool, default=False)
     args = parser.parse_args()
 

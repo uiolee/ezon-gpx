@@ -76,10 +76,10 @@ jobs:
 
       - name: Smoke test (wheel)
         shell: bash
-        run: uv run --isolated --no-project --with dist/*.whl ezon-gpx -d outdir1 --hour -2 --indent true test/test.gpx
+        run: uv run --isolated --no-project --with dist/*.whl ezon-gpx -d outdir1 --hour '-2' --indent 4 test/test.gpx
       - name: Smoke test (source distribution)
         shell: bash
-        run: uv run --isolated --no-project --with dist/*.tar.gz ezon-gpx -d outdir2 --hour -2 --indent true test/test.gpx
+        run: uv run --isolated --no-project --with dist/*.tar.gz ezon-gpx -d outdir2 --hour '-2' --indent 4 test/test.gpx
 
   publish-to-testpypi:
     name: Publish 🐍 TestPyPI
@@ -104,6 +104,7 @@ jobs:
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
         with:
           enable-cache: false
+
       - name: Generate PEP 740 attestations
         uses: astral-sh/attest-action@39b6ce43875c196a579e31635b11aa2a2036384a # v0.0.7
 

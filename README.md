@@ -41,5 +41,5 @@ uvx ezon-gpx -h
 ### Examples
 
 ```sh
-ezon-gpx -d ./outdir/ --hour -2 --indent true ./test/test.gpx
+ezon-gpx -d ./outdir/ --hour -2 ./test/test.gpx
 ```

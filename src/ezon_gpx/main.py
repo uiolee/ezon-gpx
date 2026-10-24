@@ -20,7 +20,7 @@ def convert(
     out: str = "",
     outDir: str = ".",
     hour_offset=-8,
-    indent: bool = False,
+    indent: int = 2,
     strict: bool = False,
 ):
     def wpt_has_loc():
@@ -120,8 +120,7 @@ def convert(
 
     convert_tz()
 
-    if indent:
-        ET.indent(tree, space=" " * 4)
+    ET.indent(tree, space=" " * int(indent))
 
     if (not out) and outDir == ".":
         out = ".".join((ls := gpx_name.split(".")).insert(-1, "output") or ls)
@@ -135,7 +134,7 @@ def convert(
     tree.write(path, "utf-8", xml_declaration=True, short_empty_elements=False)
     print(
         "INFO:",
-        "output gpx file {} indent: {}".format("with" if indent else "without", path),
+        f"output gpx file: {path}",
     )
 
 
