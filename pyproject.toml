@@ -1,6 +1,6 @@
 [project]
 name = "ezon-gpx"
-version = "2.1.1"
+version = "2.2.1"
 description = "normalize Ezon gpx files."
 readme = "README.md"
 authors = [{ name = "uiolee" }]
