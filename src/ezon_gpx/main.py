@@ -55,6 +55,13 @@ def convert(
         for z in zeropts:
             trkseg.remove(z)
 
+    def delete_empty_ele():
+        trkpts = root.findall(_f("trk//trkseg//trkpt"))
+        for pt in trkpts:
+            ele = pt.find(_f("ele"))
+            if ele is not None and float(ele.text) == 0:
+                pt.remove(ele)
+
     def convert_tz():
         def _set(time_elem):
             a = datetime.fromisoformat(time_elem.text) + timedelta(hours=hour_offset)
@@ -88,6 +95,11 @@ def convert(
     num_trk = len(trkpts)
     num_zero = len(zeropts)
 
+    ele_values = [e.text for e in root.findall(_f("trk//trkseg//trkpt//ele"))]
+    ele_invalid = (
+        True if (len(set(ele_values)) == 1 and float(ele_values[0]) == 0) else False
+    )
+
     print(
         "INFO:",
         "name: {}".format(root.find(_f("trk//name")).text),
@@ -105,6 +117,10 @@ def convert(
     if num_zero:
         delete_zero_point()
         print("INFO:", "deleted zero points:", num_zero)
+
+    if ele_invalid:
+        print("INFO:", "deleting invalid(all 0) 'ele'")
+        delete_empty_ele()
 
     trkpts = root.findall(_f("trk//trkseg//trkpt"))
     num_trk2 = len(trkpts)
@@ -139,4 +155,4 @@ def convert(
 
 
 if __name__ == "__main__":
-    convert("test/test.gpx", outDir="dist", indent=True)
+    convert("test/test.gpx", outDir="outdir", indent=True)

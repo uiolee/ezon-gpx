@@ -9,6 +9,7 @@ normalize Ezon gpx files.
 
 - add location info to `wpt`.
 - remove redundant empty points.
+- delete invalid `ele` data.
 - fix wrong timezone to UTC.
 
 ## Usage
