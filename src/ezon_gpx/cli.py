@@ -16,9 +16,8 @@ def cli():
     parser.add_argument(
         "-d", "--dir", help="the dest dir of output", type=str, default="outdir"
     )
-    parser.add_argument("--hour", help="hour offset", type=int, default=-8)
     parser.add_argument(
-        "--indent", help="output file with indent", type=bool, default=True
+        "--hour", help="hour offset", type=int, default=-8, required=True
     )
     parser.add_argument("--indent", help="indent size", type=int, default=2)
     parser.add_argument("--strict", help="strict", type=bool, default=False)
