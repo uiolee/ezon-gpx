@@ -14,11 +14,11 @@ def cli():
     )
     parser.add_argument("-o", "--out", help="the filename of output")
     parser.add_argument(
-        "-d", "--dir", help="the dest dir of output", type=str, default="dist"
+        "-d", "--dir", help="the dest dir of output", type=str, default="outdir"
     )
     parser.add_argument("--hour", help="hour offset", type=int, default=-8)
     parser.add_argument(
-        "--indent", help="output file with indent", type=bool, default=False
+        "--indent", help="output file with indent", type=bool, default=True
     )
     parser.add_argument("--strict", help="strict", type=bool, default=False)
     args = parser.parse_args()
