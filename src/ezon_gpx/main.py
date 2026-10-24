@@ -74,10 +74,11 @@ def convert(
     root = tree.getroot()
 
     creator = root.get("creator") or ""
-    if strict and ("ezon" not in creator):
+    if "ezon" not in creator.lower():
         err = "It looks like this gpx was not created by ezon"
         print("WARN:", err)
-        raise Exception(err)
+        if strict:
+            raise Exception(err)
 
     wpt = root.findall(_f("wpt"))[0]
     wpt_time = wpt.find(_f("time"))
