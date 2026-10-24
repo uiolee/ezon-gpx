@@ -46,8 +46,9 @@ def convert(
             _set()
         else:
             print("WARN:", "first point's time not equals to wpt's")
-            if not strict:
-                _set()
+            if strict:
+                return
+            _set()
 
     def delete_zero_point():
         trkseg = root.findall(_f("trk//trkseg"))[0]
