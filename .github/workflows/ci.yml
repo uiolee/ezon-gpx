@@ -20,7 +20,7 @@ permissions:
   contents: read
 
 env:
-  artifact_name: "python-package-distributions"
+  artifact_name: "${{ github.sha }}"
   artifact_path: "dist/"
 
 jobs:
@@ -29,24 +29,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-tags: "TRUE"
           fetch-depth: "9"
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
-      - name: Install pypa/build
-        run: >-
-          python3 -m
-          pip install
-          build
-          --user
-      - name: Build a binary wheel and a source tarball
-        run: python3 -m build
-      - name: Store the distribution packages
-        uses: actions/upload-artifact@v4
+
+      - uses: actions/setup-python@v7
+
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+
+      - run: uv build
+
+      - uses: actions/upload-artifact@v7
         with:
           name: ${{ env.artifact_name }}
           path: ${{ env.artifact_path }}
@@ -54,26 +48,38 @@ jobs:
           compression-level: 1
 
   test-cli:
+    needs:
+      - build
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        pyv: ["3.11"]
+        pyv: ["3.15"]
     env:
       python_version: ${{ matrix.pyv }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: ${{ env.artifact_name }}
+          path: ${{ env.artifact_path }}
+
       - name: Set up Python ${{ matrix.pyv }}
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.pyv }}
 
-      - name: Test cli
+      - name: Install uv
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+
+      - name: Smoke test (wheel)
         shell: bash
-        run: |
-          chmod +x ./test/cli.test.sh
-          ./test/cli.test.sh
+        run: uv run --isolated --no-project --with dist/*.whl ezon-gpx -d outdir1 --hour -2 --indent true test/test.gpx
+      - name: Smoke test (source distribution)
+        shell: bash
+        run: uv run --isolated --no-project --with dist/*.tar.gz ezon-gpx -d outdir2 --hour -2 --indent true test/test.gpx
 
   publish-to-testpypi:
     name: Publish 🐍 TestPyPI
@@ -89,12 +95,19 @@ jobs:
       id-token: write # IMPORTANT: mandatory for trusted publishing
 
     steps:
-      - name: Download all the dists
-        uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: ${{ env.artifact_name }}
           path: ${{ env.artifact_path }}
-      - name: Publish distribution 📦 to TestPyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
         with:
-          repository-url: https://test.pypi.org/legacy/
+          enable-cache: false
+      - name: Generate PEP 740 attestations
+        uses: astral-sh/attest-action@39b6ce43875c196a579e31635b11aa2a2036384a # v0.0.7
+
+      - name: Publish
+        env:
+          UV_PUBLISH_URL: https://test.pypi.org/legacy/
+        run: uv publish

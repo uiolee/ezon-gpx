@@ -2,7 +2,7 @@ import argparse
 from os import listdir
 from os.path import isdir, join
 
-from main import convert
+from .main import convert
 
 
 def cli():

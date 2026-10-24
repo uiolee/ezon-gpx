@@ -3,15 +3,13 @@
 [![CI](https://github.com/uiolee/ezon-gpx/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/uiolee/ezon-gpx/actions/workflows/ci.yml)
 [![Publish](https://github.com/uiolee/ezon-gpx/actions/workflows/publish.yml/badge.svg)](https://github.com/uiolee/ezon-gpx/actions/workflows/publish.yml)
 
-converter for Ezon gpx file.
-
 ## Feat
 
-convert Ezon gpx files.
+normalize Ezon gpx files.
 
 - add location info to `wpt`.
-- delete useless empty points.
-- fix timezone to UTC.
+- remove redundant empty points.
+- fix wrong timezone to UTC.
 
 ## Usage
 
@@ -23,28 +21,25 @@ convert Ezon gpx files.
 [![PyPI - License](https://img.shields.io/pypi/l/ezon-gpx)](./LICENSE)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/ezon-gpx)](https://pypi.org/p/ezon-gpx)
 
-### pipx
+### Run with installation
 
-#### Install
-
-```bash
-pipx install ezon-gpx
+```sh
+uv tool install ezon-gpx
 ```
 
-#### get help
-
-```bash
+```sh
 ezon-gpx -h
 ```
 
-### source
+### Run without installation
 
-#### Python
+```sh
+uvx ezon-gpx -h
+# uv tool run ezon-gpx -h
+```
 
-see [./src/main.py](./src/main.py#L141) for more.
+### Examples
 
-## Develop Env
-
-```plain
-Python 3.11.8
+```sh
+ezon-gpx -d ./outdir/ --hour -2 --indent true ./test/test.gpx
 ```
