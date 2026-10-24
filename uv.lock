@@ -4,5 +4,5 @@ requires-python = ">=3.15"
 
 [[package]]
 name = "ezon-gpx"
-version = "2.0.1.dev1"
+version = "2.1.1"
 source = { editable = "." }
